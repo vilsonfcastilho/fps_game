@@ -4,6 +4,8 @@ use rand::*;
 use rngs::ThreadRng;
 use std::f32::consts::PI;
 
+use crate::game::player::player_shooting::Shootable;
+
 pub struct TargetPlugin;
 
 impl Plugin for TargetPlugin {
@@ -69,6 +71,7 @@ fn init_grid_shot(
             },
             Target,
             DeadTarged,
+            Shootable,
         ));
     }
 }
