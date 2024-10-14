@@ -72,7 +72,8 @@ fn init_player(mut commands: Commands, asset_server: Res<AssetServer>) {
         .id();
 
     // Camera - Tracer Spawn Spot
-    let spawn_spot: Vec3 = blender_to_world(Vec3::new(0.530462, 2.10557, -0.466568));
+    // let spawn_spot: Vec3 = blender_to_world(Vec3::new(0.530462, 2.10557, -0.466568));
+    let spawn_spot: Vec3 = blender_to_world(Vec3::new(0.530462, -3., -0.466568));
     let tracer_spawn_entity: Entity = commands
         .spawn((
             TransformBundle {
