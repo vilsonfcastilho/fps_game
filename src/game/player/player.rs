@@ -1,5 +1,6 @@
 use core::f32;
 
+use bevy::ecs::system::*;
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
@@ -33,9 +34,8 @@ pub struct Player {
     pub speed: f32,
 }
 
-fn init_player(mut commands: Commands) {
+fn init_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let fov: f32 = 103.0_f32.to_radians();
-
     let camera_entity: Entity = commands
         .spawn((
             Camera3dBundle {
@@ -52,6 +52,15 @@ fn init_player(mut commands: Commands) {
                 rotation_lock: 88.0,
             },
         ))
+        .id();
+
+    let gun_model: Handle<Scene> = asset_server.load("models/ak.glb#Scene0");
+    let gun_entity: Entity = commands
+        .spawn(SceneBundle {
+            scene: gun_model,
+            transform: Transform::IDENTITY,
+            ..Default::default()
+        })
         .id();
 
     let player_entity: Entity = commands
@@ -75,5 +84,6 @@ fn init_player(mut commands: Commands) {
         ))
         .id();
 
+    commands.entity(camera_entity).add_child(gun_entity);
     commands.entity(player_entity).add_child(camera_entity);
 }
