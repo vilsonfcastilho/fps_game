@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
+use crate::game::player::player_shooting::Shootable;
+
 use super::targets;
 
 pub struct LevelPlugin;
@@ -31,6 +33,7 @@ fn init_level(
             mesh: meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(1000.))),
             ..Default::default()
         },
+        Shootable,
     ));
 
     // Spawn the wall
@@ -42,6 +45,7 @@ fn init_level(
             mesh: meshes.add(Cuboid::from_length(60.)),
             ..Default::default()
         },
+        Shootable,
     ));
 
     // Spanw the light
